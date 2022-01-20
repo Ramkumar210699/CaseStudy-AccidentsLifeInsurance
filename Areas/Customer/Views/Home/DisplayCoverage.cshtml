@@ -1,0 +1,13 @@
+﻿@model CaseStudy.Models.PolicyCoverage
+<option value="">---------Select Policy Amount---------</option>
+@if (ViewBag.PolicyCovAmount != null)
+{
+    foreach (var item in ViewBag.PolicyCovAmount)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+}
+
+
+
+

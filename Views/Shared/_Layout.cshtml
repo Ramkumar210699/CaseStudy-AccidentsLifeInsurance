@@ -1,0 +1,67 @@
+﻿
+@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+   
+    
+    <style>
+        .main {
+            background-image: url("https://media.istockphoto.com/photos/round-podium-or-pedestal-with-green-backgound-picture-id1299157256?b=1&k=20&m=1299157256&s=170667a&w=0&h=K1_5faLgJFynzHgBRyHrPKJCL24k9Oy_2-NFadPVjiw=");
+            background-size: cover;
+            height: contain;
+        }
+    </style>
+
+</head>
+<body class="main">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        @*<div class="container">
+            <div class="navbar-header">
+                <h1 id="font-face">Abc Ltd Insurance Company</h1>
+            </div>
+        </div>*@
+        <div class="container">
+            <div class="navbar-header">
+               
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                @*@section login{
+            @Html.ActionLink("Login", "Login", "Account")
+        }*@
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav-row">
+                    <li><a href="/Account/">Home</a></li>
+                    <li><a href="/Account/About/">About Us</a></li>
+                    <li><a href="/Account/Login">Login</a></li>
+                </ul>
+                <div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

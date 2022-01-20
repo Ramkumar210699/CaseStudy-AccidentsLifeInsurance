@@ -1,0 +1,35 @@
+﻿@model CaseStudy.ViewModel.PolicyDetailsAll
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<h3>Payment Details</h3>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark text-white">
+        <tr>
+
+            <th>@Html.DisplayNameFor(m => Model.premiumPayments.FirstOrDefault().RegistredID)</th>
+            <th>@Html.DisplayNameFor(m => Model.premiumPayments.FirstOrDefault().DateOfPayment)</th>
+            <th>@Html.DisplayNameFor(m => Model.premiumPayments.First().PayAmount)</th>
+            <th>@Html.DisplayNameFor(m => Model.premiumPayments.FirstOrDefault().PayType)</th>
+            <th>@Html.DisplayNameFor(m => Model.premiumPayments.FirstOrDefault().ReceiptNumber)</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.premiumPayments.ToList())
+        {
+        <tr>
+
+            <td>@item.RegistredID</td>
+            <td>@item.DateOfPayment</td>
+            <td>@item.PayAmount</td>
+            <td>@item.PayType</td>
+            <td>@item.ReceiptNumber</td>
+        </tr>
+
+        }
+    </tbody>
+</table>

@@ -1,0 +1,208 @@
+﻿@model CaseStudy.Models.PolicyClaimModel
+@{
+    ViewBag.Title = "Claim";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+
+@*<link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />*@
+@*<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+<script src="~/Scripts/jquery-ui-1.13.0.min.js"></script>
+@*<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+      rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>*@
+@*<script>
+       $(function () {
+           $(document).ready(function () {
+               debugger
+           $("").datepicker({
+               dateFormat: "dd-mm-yy",
+               minDate: -0,
+               maxDate: "+0M +0D"
+
+           });
+           $("#datepicker").datepicker({ minDate: 0 });
+       });
+
+
+    </script>*@
+<script>
+    
+
+    //$(document).ready(function () {
+    //    debugger
+    //    $("#datepicker").datepicker({
+    //        dateFormat: "dd-mm-yy",
+    //        minDate: -0,
+    //        maxDate: "+0M +0D"
+
+    //    })
+    //    $("#datepicker").datepicker({ minDate: 0 })
+    //})
+
+    $(document).ready(function () {
+        $("#InjuryID").change(function () {
+            var Injureid = $(this).val();
+            //debugger
+            $.ajax({
+                type: "Get",
+                url: "/Customer/ClaimPolicy/Reimburse?InjuryId=" + Injureid,
+                contentType: "html",
+                //success: function (response) {
+                //    debugger
+                //    $("#ReimburseAmount").empty();
+                //    $("#ReimburseAmount").append(response);
+                success: function (data) {
+                    // debugger
+                    $("#ReimburseAmount").val(data[0]);
+                }
+            })
+        })
+
+    })
+
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div style="background-color:cadetblue">
+        <div class="form-horizontal">
+            <h3>PolicyClaim</h3>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisteredID, "RegisteredID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("RegisteredID", ViewBag.Name as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RegisteredID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ApplicantName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.ApplicantName,@ViewBag.UserName as string,new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownList("ApplicantName", ViewBag.UserName as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ApplicantName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubmitionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SubmitionDate, new { htmlAttributes = new { @class = "form-control", @Value = @DateTime.Now.ToString() } })
+                    @Html.ValidationMessageFor(model => model.SubmitionDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateOfInjury, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DateOfInjury, "", new { htmlAttributes = new { @class = "datepicker-13" } })
+
+                    @Html.ValidationMessageFor(model => model.DateOfInjury, "", new { @class = "text-danger" })
+                </div>
+
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.InjuryID, "InjuryID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("InjuryID", ViewBag.data as SelectList, "--Select Injury Type--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.InjuryID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NomineeName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("NomineeName", ViewBag.NomineeName as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @*@Html.EditorFor(model => model.NomineeName, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.NomineeName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NomineeRelation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.NomineeRelation, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownList("NomineeRelation", ViewBag.NomineeRelation as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NomineeRelation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ReimburseAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ReimburseAmount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ReimburseAmount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.ApprovedOrRejected, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ApprovedOrRejected, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ApprovedOrRejected, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ApprovedOrrejectedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ApprovedOrrejectedBy, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ApprovedOrrejectedBy, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group" style="visibility: hidden">
+                @*@Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    @*@Html.EditFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" }, })*@
+                    @Html.DropDownList("UserID", ViewBag.UserId as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @*@Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+    <script type="text/javascript">
+    $(function () {
+        $(document).ready(function () {
+            @*if ($(this).@ViewBag.msg == "Null") {
+                $("#rum").show();
+            }
+            else {
+                $("#rum").hide();
+            }*@
+            $(".datepicker").datepicker({
+                dateFormat: "dd-mm-yy",
+                minDate: -0,
+                maxDate: "+0M +0D"
+
+            });
+            $("#datepicker").datepicker({ minDate: 0 });
+        });
+
+    });
+    </script>
+}

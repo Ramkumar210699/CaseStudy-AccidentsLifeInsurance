@@ -1,0 +1,910 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CaseStudyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CustomerPolicyDetails">
+          <Key>
+            <PropertyRef Name="RegisteredID" />
+          </Key>
+          <Property Name="PolicyID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="RegisterdDate" Type="date" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="PolicyAmount" Type="float" />
+          <Property Name="PolicyTerm" Type="varchar" MaxLength="10" />
+          <Property Name="UserNoTerms" Type="int" />
+          <Property Name="PremiumAmount" Type="float" />
+          <Property Name="NomineeName" Type="varchar" MaxLength="50" />
+          <Property Name="NomineeRelation" Type="varchar" MaxLength="15" />
+          <Property Name="ManagerID" Type="int" />
+          <Property Name="RegisteredID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InjuryType">
+          <Key>
+            <PropertyRef Name="InjuryID" />
+          </Key>
+          <Property Name="PolicyID" Type="int" />
+          <Property Name="InjuryName" Type="varchar" MaxLength="30" />
+          <Property Name="InjuryID" Type="int" Nullable="false" />
+          <Property Name="InjuryDescription" Type="varchar(max)" />
+          <Property Name="ReimbursePercent" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolicyClaim">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="RegisteredID" Type="int" />
+          <Property Name="ApplicantName" Type="varchar" MaxLength="20" />
+          <Property Name="SubmitionDate" Type="date" />
+          <Property Name="DateOfInjury" Type="date" />
+          <Property Name="InjuryID" Type="int" />
+          <Property Name="NomineeName" Type="varchar" MaxLength="50" />
+          <Property Name="NomineeRelation" Type="varchar" MaxLength="15" />
+          <Property Name="ReimburseAmount" Type="float" />
+          <Property Name="ApprovedOrRejected" Type="varchar" MaxLength="10" />
+          <Property Name="ApprovedOrrejectedBy" Type="varchar" MaxLength="10" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolicyCoverage">
+          <Key>
+            <PropertyRef Name="Srlno" />
+          </Key>
+          <Property Name="PolicyID" Type="int" />
+          <Property Name="PolicyDuration" Type="int" />
+          <Property Name="PolicyAmount" Type="float" />
+          <Property Name="PolicyCoverageAmount" Type="float" />
+          <Property Name="Srlno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolicyDetails">
+          <Key>
+            <PropertyRef Name="PolicyID" />
+          </Key>
+          <Property Name="PolicyID" Type="int" Nullable="false" />
+          <Property Name="PolicyName" Type="varchar(max)" />
+          <Property Name="MaturityYears" Type="int" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="PremiumPayment">
+          <Key>
+            <PropertyRef Name="ReceiptNumber" />
+          </Key>
+          <Property Name="RegistredID" Type="int" />
+          <Property Name="PayAmount" Type="float" />
+          <Property Name="PayType" Type="varchar" MaxLength="10" />
+          <Property Name="DateOfPayment" Type="date" />
+          <Property Name="ReceiptNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersRegistrationDetails">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="20" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="10" />
+          <Property Name="UserType" Type="int" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="10" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="Age" Type="int" />
+          <Property Name="UserAddress" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="UserType1">
+          <Key>
+            <PropertyRef Name="UserType" />
+          </Key>
+          <Property Name="UserType" Type="int" Nullable="false" />
+          <Property Name="UserDescription" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CaseStudy.dbo.Vw_customerpolicydetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Vw_customerpolicydetails">
+          <Key>
+            <PropertyRef Name="RegisteredID" />
+          </Key>
+          <Property Name="PolicyID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="RegisterdDate" Type="date" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="PolicyAmount" Type="float" />
+          <Property Name="PolicyTerm" Type="varchar" MaxLength="10" />
+          <Property Name="UserNoTerms" Type="int" />
+          <Property Name="PremiumAmount" Type="float" />
+          <Property Name="NomineeName" Type="varchar" MaxLength="50" />
+          <Property Name="NomineeRelation" Type="varchar" MaxLength="15" />
+          <Property Name="ManagerID" Type="int" />
+          <Property Name="RegisteredID" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="20" />
+          <Property Name="Managername" Type="varchar" MaxLength="20" />
+          <Property Name="Policyname" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CaseStudy.dbo.vw_Policy' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Policy">
+          <Key>
+            <PropertyRef Name="PolicyID" />
+          </Key>
+          <Property Name="PolicyID" Type="int" Nullable="false" />
+          <Property Name="PolicyName" Type="varchar(max)" />
+          <Property Name="MaturityYears" Type="int" />
+          <Property Name="ManagerName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CaseStudy.dbo.Vw_PolicyClaim' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Vw_PolicyClaim">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ReimbursePercent" />
+          </Key>
+          <Property Name="RegisteredID" Type="int" />
+          <Property Name="ApplicantName" Type="varchar" MaxLength="20" />
+          <Property Name="SubmitionDate" Type="date" />
+          <Property Name="DateOfInjury" Type="date" />
+          <Property Name="InjuryID" Type="int" />
+          <Property Name="NomineeName" Type="varchar" MaxLength="50" />
+          <Property Name="PolicyAmount" Type="float" />
+          <Property Name="PremiumAmount" Type="float" />
+          <Property Name="ReimburseAmount" Type="float" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ManagerID" Type="int" />
+          <Property Name="InjuryDescription" Type="varchar(max)" />
+          <Property Name="ReimbursePercent" Type="int" Nullable="false" />
+          <Property Name="ApprovedOrRejected" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CaseStudy.dbo.vw_PolicyDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_PolicyDetails">
+          <Key>
+            <PropertyRef Name="PolicyID" />
+          </Key>
+          <Property Name="PolicyID" Type="int" Nullable="false" />
+          <Property Name="PolicyName" Type="varchar(max)" />
+          <Property Name="MaturityYears" Type="int" />
+          <Property Name="ManagerID" Type="int" />
+          <Property Name="PolicyDuration" Type="int" />
+          <Property Name="PolicyAmount" Type="float" />
+          <Property Name="PolicyCoverageAmount" Type="float" />
+          <Property Name="ManagerName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__CustomerP__Polic__32E0915F">
+          <End Role="PolicyDetails" Type="Self.PolicyDetails" Multiplicity="0..1" />
+          <End Role="CustomerPolicyDetails" Type="Self.CustomerPolicyDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolicyDetails">
+              <PropertyRef Name="PolicyID" />
+            </Principal>
+            <Dependent Role="CustomerPolicyDetails">
+              <PropertyRef Name="PolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CustomerP__UserI__33D4B598">
+          <End Role="UsersRegistrationDetails" Type="Self.UsersRegistrationDetails" Multiplicity="0..1" />
+          <End Role="CustomerPolicyDetails" Type="Self.CustomerPolicyDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersRegistrationDetails">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CustomerPolicyDetails">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InjuryTyp__Polic__300424B4">
+          <End Role="PolicyDetails" Type="Self.PolicyDetails" Multiplicity="0..1" />
+          <End Role="InjuryType" Type="Self.InjuryType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolicyDetails">
+              <PropertyRef Name="PolicyID" />
+            </Principal>
+            <Dependent Role="InjuryType">
+              <PropertyRef Name="PolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PolicyCla__Injur__37A5467C">
+          <End Role="InjuryType" Type="Self.InjuryType" Multiplicity="0..1" />
+          <End Role="PolicyClaim" Type="Self.PolicyClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InjuryType">
+              <PropertyRef Name="InjuryID" />
+            </Principal>
+            <Dependent Role="PolicyClaim">
+              <PropertyRef Name="InjuryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PolicyCla__Regis__36B12243">
+          <End Role="CustomerPolicyDetails" Type="Self.CustomerPolicyDetails" Multiplicity="0..1" />
+          <End Role="PolicyClaim" Type="Self.PolicyClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerPolicyDetails">
+              <PropertyRef Name="RegisteredID" />
+            </Principal>
+            <Dependent Role="PolicyClaim">
+              <PropertyRef Name="RegisteredID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PolicyCov__Polic__2D27B809">
+          <End Role="PolicyDetails" Type="Self.PolicyDetails" Multiplicity="0..1" />
+          <End Role="PolicyCoverage" Type="Self.PolicyCoverage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolicyDetails">
+              <PropertyRef Name="PolicyID" />
+            </Principal>
+            <Dependent Role="PolicyCoverage">
+              <PropertyRef Name="PolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PolicyDet__UserI__2A4B4B5E">
+          <End Role="UsersRegistrationDetails" Type="Self.UsersRegistrationDetails" Multiplicity="0..1" />
+          <End Role="PolicyDetails" Type="Self.PolicyDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersRegistrationDetails">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PolicyDetails">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PremiumPa__Regis__3A81B327">
+          <End Role="CustomerPolicyDetails" Type="Self.CustomerPolicyDetails" Multiplicity="0..1" />
+          <End Role="PremiumPayment" Type="Self.PremiumPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerPolicyDetails">
+              <PropertyRef Name="RegisteredID" />
+            </Principal>
+            <Dependent Role="PremiumPayment">
+              <PropertyRef Name="RegistredID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UsersRegi__UserT__267ABA7A">
+          <End Role="UserType1" Type="Self.UserType1" Multiplicity="0..1" />
+          <End Role="UsersRegistrationDetails" Type="Self.UsersRegistrationDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType1">
+              <PropertyRef Name="UserType" />
+            </Principal>
+            <Dependent Role="UsersRegistrationDetails">
+              <PropertyRef Name="UserType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CaseStudyModelStoreContainer">
+          <EntitySet Name="CustomerPolicyDetails" EntityType="Self.CustomerPolicyDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InjuryType" EntityType="Self.InjuryType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolicyClaim" EntityType="Self.PolicyClaim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolicyCoverage" EntityType="Self.PolicyCoverage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolicyDetails" EntityType="Self.PolicyDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PremiumPayment" EntityType="Self.PremiumPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersRegistrationDetails" EntityType="Self.UsersRegistrationDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserType1" EntityType="Self.UserType1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vw_customerpolicydetails" EntityType="Self.Vw_customerpolicydetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vw_customerpolicydetails].[PolicyID] AS [PolicyID], 
+    [Vw_customerpolicydetails].[UserID] AS [UserID], 
+    [Vw_customerpolicydetails].[RegisterdDate] AS [RegisterdDate], 
+    [Vw_customerpolicydetails].[Duration] AS [Duration], 
+    [Vw_customerpolicydetails].[PolicyAmount] AS [PolicyAmount], 
+    [Vw_customerpolicydetails].[PolicyTerm] AS [PolicyTerm], 
+    [Vw_customerpolicydetails].[UserNoTerms] AS [UserNoTerms], 
+    [Vw_customerpolicydetails].[PremiumAmount] AS [PremiumAmount], 
+    [Vw_customerpolicydetails].[NomineeName] AS [NomineeName], 
+    [Vw_customerpolicydetails].[NomineeRelation] AS [NomineeRelation], 
+    [Vw_customerpolicydetails].[ManagerID] AS [ManagerID], 
+    [Vw_customerpolicydetails].[RegisteredID] AS [RegisteredID], 
+    [Vw_customerpolicydetails].[Username] AS [Username], 
+    [Vw_customerpolicydetails].[Managername] AS [Managername], 
+    [Vw_customerpolicydetails].[Policyname] AS [Policyname]
+    FROM [dbo].[Vw_customerpolicydetails] AS [Vw_customerpolicydetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Policy" EntityType="Self.vw_Policy" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Policy].[PolicyID] AS [PolicyID], 
+    [vw_Policy].[PolicyName] AS [PolicyName], 
+    [vw_Policy].[MaturityYears] AS [MaturityYears], 
+    [vw_Policy].[ManagerName] AS [ManagerName]
+    FROM [dbo].[vw_Policy] AS [vw_Policy]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Vw_PolicyClaim" EntityType="Self.Vw_PolicyClaim" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vw_PolicyClaim].[RegisteredID] AS [RegisteredID], 
+    [Vw_PolicyClaim].[ApplicantName] AS [ApplicantName], 
+    [Vw_PolicyClaim].[SubmitionDate] AS [SubmitionDate], 
+    [Vw_PolicyClaim].[DateOfInjury] AS [DateOfInjury], 
+    [Vw_PolicyClaim].[InjuryID] AS [InjuryID], 
+    [Vw_PolicyClaim].[NomineeName] AS [NomineeName], 
+    [Vw_PolicyClaim].[PolicyAmount] AS [PolicyAmount], 
+    [Vw_PolicyClaim].[PremiumAmount] AS [PremiumAmount], 
+    [Vw_PolicyClaim].[ReimburseAmount] AS [ReimburseAmount], 
+    [Vw_PolicyClaim].[UserId] AS [UserId], 
+    [Vw_PolicyClaim].[ManagerID] AS [ManagerID], 
+    [Vw_PolicyClaim].[InjuryDescription] AS [InjuryDescription], 
+    [Vw_PolicyClaim].[ReimbursePercent] AS [ReimbursePercent], 
+    [Vw_PolicyClaim].[ApprovedOrRejected] AS [ApprovedOrRejected]
+    FROM [dbo].[Vw_PolicyClaim] AS [Vw_PolicyClaim]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_PolicyDetails" EntityType="Self.vw_PolicyDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_PolicyDetails].[PolicyID] AS [PolicyID], 
+    [vw_PolicyDetails].[PolicyName] AS [PolicyName], 
+    [vw_PolicyDetails].[MaturityYears] AS [MaturityYears], 
+    [vw_PolicyDetails].[ManagerID] AS [ManagerID], 
+    [vw_PolicyDetails].[PolicyDuration] AS [PolicyDuration], 
+    [vw_PolicyDetails].[PolicyAmount] AS [PolicyAmount], 
+    [vw_PolicyDetails].[PolicyCoverageAmount] AS [PolicyCoverageAmount], 
+    [vw_PolicyDetails].[ManagerName] AS [ManagerName]
+    FROM [dbo].[vw_PolicyDetails] AS [vw_PolicyDetails]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__CustomerP__Polic__32E0915F" Association="Self.FK__CustomerP__Polic__32E0915F">
+            <End Role="PolicyDetails" EntitySet="PolicyDetails" />
+            <End Role="CustomerPolicyDetails" EntitySet="CustomerPolicyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomerP__UserI__33D4B598" Association="Self.FK__CustomerP__UserI__33D4B598">
+            <End Role="UsersRegistrationDetails" EntitySet="UsersRegistrationDetails" />
+            <End Role="CustomerPolicyDetails" EntitySet="CustomerPolicyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InjuryTyp__Polic__300424B4" Association="Self.FK__InjuryTyp__Polic__300424B4">
+            <End Role="PolicyDetails" EntitySet="PolicyDetails" />
+            <End Role="InjuryType" EntitySet="InjuryType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PolicyCla__Injur__37A5467C" Association="Self.FK__PolicyCla__Injur__37A5467C">
+            <End Role="InjuryType" EntitySet="InjuryType" />
+            <End Role="PolicyClaim" EntitySet="PolicyClaim" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PolicyCla__Regis__36B12243" Association="Self.FK__PolicyCla__Regis__36B12243">
+            <End Role="CustomerPolicyDetails" EntitySet="CustomerPolicyDetails" />
+            <End Role="PolicyClaim" EntitySet="PolicyClaim" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PolicyCov__Polic__2D27B809" Association="Self.FK__PolicyCov__Polic__2D27B809">
+            <End Role="PolicyDetails" EntitySet="PolicyDetails" />
+            <End Role="PolicyCoverage" EntitySet="PolicyCoverage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PolicyDet__UserI__2A4B4B5E" Association="Self.FK__PolicyDet__UserI__2A4B4B5E">
+            <End Role="UsersRegistrationDetails" EntitySet="UsersRegistrationDetails" />
+            <End Role="PolicyDetails" EntitySet="PolicyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PremiumPa__Regis__3A81B327" Association="Self.FK__PremiumPa__Regis__3A81B327">
+            <End Role="CustomerPolicyDetails" EntitySet="CustomerPolicyDetails" />
+            <End Role="PremiumPayment" EntitySet="PremiumPayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UsersRegi__UserT__267ABA7A" Association="Self.FK__UsersRegi__UserT__267ABA7A">
+            <End Role="UserType1" EntitySet="UserType1" />
+            <End Role="UsersRegistrationDetails" EntitySet="UsersRegistrationDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CaseStudyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CustomerPolicyDetail">
+          <Key>
+            <PropertyRef Name="RegisteredID" />
+          </Key>
+          <Property Name="PolicyID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="RegisterdDate" Type="DateTime" Precision="0" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="PolicyAmount" Type="Double" />
+          <Property Name="PolicyTerm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserNoTerms" Type="Int32" />
+          <Property Name="PremiumAmount" Type="Double" />
+          <Property Name="NomineeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomineeRelation" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ManagerID" Type="Int32" />
+          <Property Name="RegisteredID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PolicyDetail" Relationship="Self.FK__CustomerP__Polic__32E0915F" FromRole="CustomerPolicyDetails" ToRole="PolicyDetails" />
+          <NavigationProperty Name="UsersRegistrationDetail" Relationship="Self.FK__CustomerP__UserI__33D4B598" FromRole="CustomerPolicyDetails" ToRole="UsersRegistrationDetails" />
+          <NavigationProperty Name="PolicyClaims" Relationship="Self.FK__PolicyCla__Regis__36B12243" FromRole="CustomerPolicyDetails" ToRole="PolicyClaim" />
+          <NavigationProperty Name="PremiumPayments" Relationship="Self.FK__PremiumPa__Regis__3A81B327" FromRole="CustomerPolicyDetails" ToRole="PremiumPayment" />
+        </EntityType>
+        <EntityType Name="InjuryType">
+          <Key>
+            <PropertyRef Name="InjuryID" />
+          </Key>
+          <Property Name="PolicyID" Type="Int32" />
+          <Property Name="InjuryName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="InjuryID" Type="Int32" Nullable="false" />
+          <Property Name="InjuryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReimbursePercent" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PolicyDetail" Relationship="Self.FK__InjuryTyp__Polic__300424B4" FromRole="InjuryType" ToRole="PolicyDetails" />
+          <NavigationProperty Name="PolicyClaims" Relationship="Self.FK__PolicyCla__Injur__37A5467C" FromRole="InjuryType" ToRole="PolicyClaim" />
+        </EntityType>
+        <EntityType Name="PolicyClaim">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="RegisteredID" Type="Int32" />
+          <Property Name="ApplicantName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SubmitionDate" Type="DateTime" Precision="0" />
+          <Property Name="DateOfInjury" Type="DateTime" Precision="0" />
+          <Property Name="InjuryID" Type="Int32" />
+          <Property Name="NomineeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomineeRelation" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ReimburseAmount" Type="Double" />
+          <Property Name="ApprovedOrRejected" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovedOrrejectedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CustomerPolicyDetail" Relationship="Self.FK__PolicyCla__Regis__36B12243" FromRole="PolicyClaim" ToRole="CustomerPolicyDetails" />
+          <NavigationProperty Name="InjuryType" Relationship="Self.FK__PolicyCla__Injur__37A5467C" FromRole="PolicyClaim" ToRole="InjuryType" />
+        </EntityType>
+        <EntityType Name="PolicyCoverage">
+          <Key>
+            <PropertyRef Name="Srlno" />
+          </Key>
+          <Property Name="PolicyID" Type="Int32" />
+          <Property Name="PolicyDuration" Type="Int32" />
+          <Property Name="PolicyAmount" Type="Double" />
+          <Property Name="PolicyCoverageAmount" Type="Double" />
+          <Property Name="Srlno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="PolicyDetail" Relationship="Self.FK__PolicyCov__Polic__2D27B809" FromRole="PolicyCoverage" ToRole="PolicyDetails" />
+        </EntityType>
+        <EntityType Name="PolicyDetail">
+          <Key>
+            <PropertyRef Name="PolicyID" />
+          </Key>
+          <Property Name="PolicyID" Type="Int32" Nullable="false" />
+          <Property Name="PolicyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MaturityYears" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="CustomerPolicyDetails" Relationship="Self.FK__CustomerP__Polic__32E0915F" FromRole="PolicyDetails" ToRole="CustomerPolicyDetails" />
+          <NavigationProperty Name="InjuryTypes" Relationship="Self.FK__InjuryTyp__Polic__300424B4" FromRole="PolicyDetails" ToRole="InjuryType" />
+          <NavigationProperty Name="PolicyCoverages" Relationship="Self.FK__PolicyCov__Polic__2D27B809" FromRole="PolicyDetails" ToRole="PolicyCoverage" />
+          <NavigationProperty Name="UsersRegistrationDetail" Relationship="Self.FK__PolicyDet__UserI__2A4B4B5E" FromRole="PolicyDetails" ToRole="UsersRegistrationDetails" />
+        </EntityType>
+        <EntityType Name="PremiumPayment">
+          <Key>
+            <PropertyRef Name="ReceiptNumber" />
+          </Key>
+          <Property Name="RegistredID" Type="Int32" />
+          <Property Name="PayAmount" Type="Double" />
+          <Property Name="PayType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfPayment" Type="DateTime" Precision="0" />
+          <Property Name="ReceiptNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CustomerPolicyDetail" Relationship="Self.FK__PremiumPa__Regis__3A81B327" FromRole="PremiumPayment" ToRole="CustomerPolicyDetails" />
+        </EntityType>
+        <EntityType Name="UsersRegistrationDetail">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="Int32" />
+          <Property Name="MobileNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="UserAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CustomerPolicyDetails" Relationship="Self.FK__CustomerP__UserI__33D4B598" FromRole="UsersRegistrationDetails" ToRole="CustomerPolicyDetails" />
+          <NavigationProperty Name="PolicyDetails" Relationship="Self.FK__PolicyDet__UserI__2A4B4B5E" FromRole="UsersRegistrationDetails" ToRole="PolicyDetails" />
+          <NavigationProperty Name="UserType1" Relationship="Self.FK__UsersRegi__UserT__267ABA7A" FromRole="UsersRegistrationDetails" ToRole="UserType1" />
+        </EntityType>
+        <EntityType Name="UserType1">
+          <Key>
+            <PropertyRef Name="UserType" />
+          </Key>
+          <Property Name="UserType" Type="Int32" Nullable="false" />
+          <Property Name="UserDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UsersRegistrationDetails" Relationship="Self.FK__UsersRegi__UserT__267ABA7A" FromRole="UserType1" ToRole="UsersRegistrationDetails" />
+        </EntityType>
+        <EntityType Name="Vw_customerpolicydetails">
+          <Key>
+            <PropertyRef Name="RegisteredID" />
+          </Key>
+          <Property Name="PolicyID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="RegisterdDate" Type="DateTime" Precision="0" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="PolicyAmount" Type="Double" />
+          <Property Name="PolicyTerm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserNoTerms" Type="Int32" />
+          <Property Name="PremiumAmount" Type="Double" />
+          <Property Name="NomineeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomineeRelation" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ManagerID" Type="Int32" />
+          <Property Name="RegisteredID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Managername" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Policyname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vw_Policy">
+          <Key>
+            <PropertyRef Name="PolicyID" />
+          </Key>
+          <Property Name="PolicyID" Type="Int32" Nullable="false" />
+          <Property Name="PolicyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MaturityYears" Type="Int32" />
+          <Property Name="ManagerName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Vw_PolicyClaim">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ReimbursePercent" />
+          </Key>
+          <Property Name="RegisteredID" Type="Int32" />
+          <Property Name="ApplicantName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SubmitionDate" Type="DateTime" Precision="0" />
+          <Property Name="DateOfInjury" Type="DateTime" Precision="0" />
+          <Property Name="InjuryID" Type="Int32" />
+          <Property Name="NomineeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PolicyAmount" Type="Double" />
+          <Property Name="PremiumAmount" Type="Double" />
+          <Property Name="ReimburseAmount" Type="Double" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ManagerID" Type="Int32" />
+          <Property Name="InjuryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReimbursePercent" Type="Int32" Nullable="false" />
+          <Property Name="ApprovedOrRejected" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vw_PolicyDetails">
+          <Key>
+            <PropertyRef Name="PolicyID" />
+          </Key>
+          <Property Name="PolicyID" Type="Int32" Nullable="false" />
+          <Property Name="PolicyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MaturityYears" Type="Int32" />
+          <Property Name="ManagerID" Type="Int32" />
+          <Property Name="PolicyDuration" Type="Int32" />
+          <Property Name="PolicyAmount" Type="Double" />
+          <Property Name="PolicyCoverageAmount" Type="Double" />
+          <Property Name="ManagerName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__CustomerP__Polic__32E0915F">
+          <End Role="PolicyDetails" Type="Self.PolicyDetail" Multiplicity="0..1" />
+          <End Role="CustomerPolicyDetails" Type="Self.CustomerPolicyDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolicyDetails">
+              <PropertyRef Name="PolicyID" />
+            </Principal>
+            <Dependent Role="CustomerPolicyDetails">
+              <PropertyRef Name="PolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CustomerP__UserI__33D4B598">
+          <End Role="UsersRegistrationDetails" Type="Self.UsersRegistrationDetail" Multiplicity="0..1" />
+          <End Role="CustomerPolicyDetails" Type="Self.CustomerPolicyDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersRegistrationDetails">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CustomerPolicyDetails">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PolicyCla__Regis__36B12243">
+          <End Role="CustomerPolicyDetails" Type="Self.CustomerPolicyDetail" Multiplicity="0..1" />
+          <End Role="PolicyClaim" Type="Self.PolicyClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerPolicyDetails">
+              <PropertyRef Name="RegisteredID" />
+            </Principal>
+            <Dependent Role="PolicyClaim">
+              <PropertyRef Name="RegisteredID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PremiumPa__Regis__3A81B327">
+          <End Role="CustomerPolicyDetails" Type="Self.CustomerPolicyDetail" Multiplicity="0..1" />
+          <End Role="PremiumPayment" Type="Self.PremiumPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerPolicyDetails">
+              <PropertyRef Name="RegisteredID" />
+            </Principal>
+            <Dependent Role="PremiumPayment">
+              <PropertyRef Name="RegistredID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InjuryTyp__Polic__300424B4">
+          <End Role="PolicyDetails" Type="Self.PolicyDetail" Multiplicity="0..1" />
+          <End Role="InjuryType" Type="Self.InjuryType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolicyDetails">
+              <PropertyRef Name="PolicyID" />
+            </Principal>
+            <Dependent Role="InjuryType">
+              <PropertyRef Name="PolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PolicyCla__Injur__37A5467C">
+          <End Role="InjuryType" Type="Self.InjuryType" Multiplicity="0..1" />
+          <End Role="PolicyClaim" Type="Self.PolicyClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InjuryType">
+              <PropertyRef Name="InjuryID" />
+            </Principal>
+            <Dependent Role="PolicyClaim">
+              <PropertyRef Name="InjuryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PolicyCov__Polic__2D27B809">
+          <End Role="PolicyDetails" Type="Self.PolicyDetail" Multiplicity="0..1" />
+          <End Role="PolicyCoverage" Type="Self.PolicyCoverage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolicyDetails">
+              <PropertyRef Name="PolicyID" />
+            </Principal>
+            <Dependent Role="PolicyCoverage">
+              <PropertyRef Name="PolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PolicyDet__UserI__2A4B4B5E">
+          <End Role="UsersRegistrationDetails" Type="Self.UsersRegistrationDetail" Multiplicity="0..1" />
+          <End Role="PolicyDetails" Type="Self.PolicyDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersRegistrationDetails">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PolicyDetails">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UsersRegi__UserT__267ABA7A">
+          <End Role="UserType1" Type="Self.UserType1" Multiplicity="0..1" />
+          <End Role="UsersRegistrationDetails" Type="Self.UsersRegistrationDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType1">
+              <PropertyRef Name="UserType" />
+            </Principal>
+            <Dependent Role="UsersRegistrationDetails">
+              <PropertyRef Name="UserType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CaseStudyEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CustomerPolicyDetails" EntityType="Self.CustomerPolicyDetail" />
+          <EntitySet Name="InjuryTypes" EntityType="Self.InjuryType" />
+          <EntitySet Name="PolicyClaims" EntityType="Self.PolicyClaim" />
+          <EntitySet Name="PolicyCoverages" EntityType="Self.PolicyCoverage" />
+          <EntitySet Name="PolicyDetails" EntityType="Self.PolicyDetail" />
+          <EntitySet Name="PremiumPayments" EntityType="Self.PremiumPayment" />
+          <EntitySet Name="UsersRegistrationDetails" EntityType="Self.UsersRegistrationDetail" />
+          <EntitySet Name="UserType1" EntityType="Self.UserType1" />
+          <EntitySet Name="Vw_customerpolicydetails" EntityType="Self.Vw_customerpolicydetails" />
+          <EntitySet Name="vw_Policy" EntityType="Self.vw_Policy" />
+          <EntitySet Name="Vw_PolicyClaim" EntityType="Self.Vw_PolicyClaim" />
+          <EntitySet Name="vw_PolicyDetails" EntityType="Self.vw_PolicyDetails" />
+          <AssociationSet Name="FK__CustomerP__Polic__32E0915F" Association="Self.FK__CustomerP__Polic__32E0915F">
+            <End Role="PolicyDetails" EntitySet="PolicyDetails" />
+            <End Role="CustomerPolicyDetails" EntitySet="CustomerPolicyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomerP__UserI__33D4B598" Association="Self.FK__CustomerP__UserI__33D4B598">
+            <End Role="UsersRegistrationDetails" EntitySet="UsersRegistrationDetails" />
+            <End Role="CustomerPolicyDetails" EntitySet="CustomerPolicyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PolicyCla__Regis__36B12243" Association="Self.FK__PolicyCla__Regis__36B12243">
+            <End Role="CustomerPolicyDetails" EntitySet="CustomerPolicyDetails" />
+            <End Role="PolicyClaim" EntitySet="PolicyClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PremiumPa__Regis__3A81B327" Association="Self.FK__PremiumPa__Regis__3A81B327">
+            <End Role="CustomerPolicyDetails" EntitySet="CustomerPolicyDetails" />
+            <End Role="PremiumPayment" EntitySet="PremiumPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InjuryTyp__Polic__300424B4" Association="Self.FK__InjuryTyp__Polic__300424B4">
+            <End Role="PolicyDetails" EntitySet="PolicyDetails" />
+            <End Role="InjuryType" EntitySet="InjuryTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PolicyCla__Injur__37A5467C" Association="Self.FK__PolicyCla__Injur__37A5467C">
+            <End Role="InjuryType" EntitySet="InjuryTypes" />
+            <End Role="PolicyClaim" EntitySet="PolicyClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PolicyCov__Polic__2D27B809" Association="Self.FK__PolicyCov__Polic__2D27B809">
+            <End Role="PolicyDetails" EntitySet="PolicyDetails" />
+            <End Role="PolicyCoverage" EntitySet="PolicyCoverages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PolicyDet__UserI__2A4B4B5E" Association="Self.FK__PolicyDet__UserI__2A4B4B5E">
+            <End Role="UsersRegistrationDetails" EntitySet="UsersRegistrationDetails" />
+            <End Role="PolicyDetails" EntitySet="PolicyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UsersRegi__UserT__267ABA7A" Association="Self.FK__UsersRegi__UserT__267ABA7A">
+            <End Role="UserType1" EntitySet="UserType1" />
+            <End Role="UsersRegistrationDetails" EntitySet="UsersRegistrationDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CaseStudyModelStoreContainer" CdmEntityContainer="CaseStudyEntities1">
+          <EntitySetMapping Name="CustomerPolicyDetails">
+            <EntityTypeMapping TypeName="CaseStudyModel.CustomerPolicyDetail">
+              <MappingFragment StoreEntitySet="CustomerPolicyDetails">
+                <ScalarProperty Name="PolicyID" ColumnName="PolicyID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RegisterdDate" ColumnName="RegisterdDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="PolicyAmount" ColumnName="PolicyAmount" />
+                <ScalarProperty Name="PolicyTerm" ColumnName="PolicyTerm" />
+                <ScalarProperty Name="UserNoTerms" ColumnName="UserNoTerms" />
+                <ScalarProperty Name="PremiumAmount" ColumnName="PremiumAmount" />
+                <ScalarProperty Name="NomineeName" ColumnName="NomineeName" />
+                <ScalarProperty Name="NomineeRelation" ColumnName="NomineeRelation" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="RegisteredID" ColumnName="RegisteredID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InjuryTypes">
+            <EntityTypeMapping TypeName="CaseStudyModel.InjuryType">
+              <MappingFragment StoreEntitySet="InjuryType">
+                <ScalarProperty Name="PolicyID" ColumnName="PolicyID" />
+                <ScalarProperty Name="InjuryName" ColumnName="InjuryName" />
+                <ScalarProperty Name="InjuryID" ColumnName="InjuryID" />
+                <ScalarProperty Name="InjuryDescription" ColumnName="InjuryDescription" />
+                <ScalarProperty Name="ReimbursePercent" ColumnName="ReimbursePercent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolicyClaims">
+            <EntityTypeMapping TypeName="CaseStudyModel.PolicyClaim">
+              <MappingFragment StoreEntitySet="PolicyClaim">
+                <ScalarProperty Name="RegisteredID" ColumnName="RegisteredID" />
+                <ScalarProperty Name="ApplicantName" ColumnName="ApplicantName" />
+                <ScalarProperty Name="SubmitionDate" ColumnName="SubmitionDate" />
+                <ScalarProperty Name="DateOfInjury" ColumnName="DateOfInjury" />
+                <ScalarProperty Name="InjuryID" ColumnName="InjuryID" />
+                <ScalarProperty Name="NomineeName" ColumnName="NomineeName" />
+                <ScalarProperty Name="NomineeRelation" ColumnName="NomineeRelation" />
+                <ScalarProperty Name="ReimburseAmount" ColumnName="ReimburseAmount" />
+                <ScalarProperty Name="ApprovedOrRejected" ColumnName="ApprovedOrRejected" />
+                <ScalarProperty Name="ApprovedOrrejectedBy" ColumnName="ApprovedOrrejectedBy" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolicyCoverages">
+            <EntityTypeMapping TypeName="CaseStudyModel.PolicyCoverage">
+              <MappingFragment StoreEntitySet="PolicyCoverage">
+                <ScalarProperty Name="PolicyID" ColumnName="PolicyID" />
+                <ScalarProperty Name="PolicyDuration" ColumnName="PolicyDuration" />
+                <ScalarProperty Name="PolicyAmount" ColumnName="PolicyAmount" />
+                <ScalarProperty Name="PolicyCoverageAmount" ColumnName="PolicyCoverageAmount" />
+                <ScalarProperty Name="Srlno" ColumnName="Srlno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolicyDetails">
+            <EntityTypeMapping TypeName="CaseStudyModel.PolicyDetail">
+              <MappingFragment StoreEntitySet="PolicyDetails">
+                <ScalarProperty Name="PolicyID" ColumnName="PolicyID" />
+                <ScalarProperty Name="PolicyName" ColumnName="PolicyName" />
+                <ScalarProperty Name="MaturityYears" ColumnName="MaturityYears" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PremiumPayments">
+            <EntityTypeMapping TypeName="CaseStudyModel.PremiumPayment">
+              <MappingFragment StoreEntitySet="PremiumPayment">
+                <ScalarProperty Name="RegistredID" ColumnName="RegistredID" />
+                <ScalarProperty Name="PayAmount" ColumnName="PayAmount" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="DateOfPayment" ColumnName="DateOfPayment" />
+                <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersRegistrationDetails">
+            <EntityTypeMapping TypeName="CaseStudyModel.UsersRegistrationDetail">
+              <MappingFragment StoreEntitySet="UsersRegistrationDetails">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="UserAddress" ColumnName="UserAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserType1">
+            <EntityTypeMapping TypeName="CaseStudyModel.UserType1">
+              <MappingFragment StoreEntitySet="UserType1">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserDescription" ColumnName="UserDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vw_customerpolicydetails">
+            <EntityTypeMapping TypeName="CaseStudyModel.Vw_customerpolicydetails">
+              <MappingFragment StoreEntitySet="Vw_customerpolicydetails">
+                <ScalarProperty Name="PolicyID" ColumnName="PolicyID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RegisterdDate" ColumnName="RegisterdDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="PolicyAmount" ColumnName="PolicyAmount" />
+                <ScalarProperty Name="PolicyTerm" ColumnName="PolicyTerm" />
+                <ScalarProperty Name="UserNoTerms" ColumnName="UserNoTerms" />
+                <ScalarProperty Name="PremiumAmount" ColumnName="PremiumAmount" />
+                <ScalarProperty Name="NomineeName" ColumnName="NomineeName" />
+                <ScalarProperty Name="NomineeRelation" ColumnName="NomineeRelation" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="RegisteredID" ColumnName="RegisteredID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Managername" ColumnName="Managername" />
+                <ScalarProperty Name="Policyname" ColumnName="Policyname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Policy">
+            <EntityTypeMapping TypeName="CaseStudyModel.vw_Policy">
+              <MappingFragment StoreEntitySet="vw_Policy">
+                <ScalarProperty Name="PolicyID" ColumnName="PolicyID" />
+                <ScalarProperty Name="PolicyName" ColumnName="PolicyName" />
+                <ScalarProperty Name="MaturityYears" ColumnName="MaturityYears" />
+                <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vw_PolicyClaim">
+            <EntityTypeMapping TypeName="CaseStudyModel.Vw_PolicyClaim">
+              <MappingFragment StoreEntitySet="Vw_PolicyClaim">
+                <ScalarProperty Name="RegisteredID" ColumnName="RegisteredID" />
+                <ScalarProperty Name="ApplicantName" ColumnName="ApplicantName" />
+                <ScalarProperty Name="SubmitionDate" ColumnName="SubmitionDate" />
+                <ScalarProperty Name="DateOfInjury" ColumnName="DateOfInjury" />
+                <ScalarProperty Name="InjuryID" ColumnName="InjuryID" />
+                <ScalarProperty Name="NomineeName" ColumnName="NomineeName" />
+                <ScalarProperty Name="PolicyAmount" ColumnName="PolicyAmount" />
+                <ScalarProperty Name="PremiumAmount" ColumnName="PremiumAmount" />
+                <ScalarProperty Name="ReimburseAmount" ColumnName="ReimburseAmount" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="InjuryDescription" ColumnName="InjuryDescription" />
+                <ScalarProperty Name="ReimbursePercent" ColumnName="ReimbursePercent" />
+                <ScalarProperty Name="ApprovedOrRejected" ColumnName="ApprovedOrRejected" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_PolicyDetails">
+            <EntityTypeMapping TypeName="CaseStudyModel.vw_PolicyDetails">
+              <MappingFragment StoreEntitySet="vw_PolicyDetails">
+                <ScalarProperty Name="PolicyID" ColumnName="PolicyID" />
+                <ScalarProperty Name="PolicyName" ColumnName="PolicyName" />
+                <ScalarProperty Name="MaturityYears" ColumnName="MaturityYears" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="PolicyDuration" ColumnName="PolicyDuration" />
+                <ScalarProperty Name="PolicyAmount" ColumnName="PolicyAmount" />
+                <ScalarProperty Name="PolicyCoverageAmount" ColumnName="PolicyCoverageAmount" />
+                <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

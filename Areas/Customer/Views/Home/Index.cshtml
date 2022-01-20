@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@{
+    //@Session["userId"]= TempData["UserId"];
+    if (@TempData["Msg"] != null)
+    {
+        <script>
+
+                alert('@TempData["msg"]')
+        </script>
+
+    }
+}

@@ -1,0 +1,57 @@
+﻿@model CaseStudy.ViewModel.PolicyDetailsAll
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+
+
+@*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />*@
+<script src="~/Scripts/modernizr-2.6.2.js"></script>
+<div class="tab-content">
+
+
+    <h3 class="text-uppercase p-2 text-center">Customer Policy Details</h3>
+
+
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark text-white">
+            <tr>
+                <th>@Html.DisplayNameFor(m => Model.vwcustomerPolicies.FirstOrDefault().Username)</th>
+                <th>@Html.DisplayNameFor(m => Model.vwcustomerPolicies.FirstOrDefault().Policyname)</th>
+                <th>@Html.DisplayNameFor(m => Model.vwcustomerPolicies.FirstOrDefault().Duration)</th>
+                <th>@Html.DisplayNameFor(m => Model.vwcustomerPolicies.FirstOrDefault().PolicyAmount)</th>
+                <th>@Html.DisplayNameFor(m => Model.vwcustomerPolicies.FirstOrDefault().PremiumAmount)</th>
+                <th>@Html.DisplayNameFor(m => Model.vwcustomerPolicies.FirstOrDefault().RegisterdDate)</th>
+                <th>@Html.DisplayNameFor(m => Model.vwcustomerPolicies.FirstOrDefault().RegisteredID)</th>
+                <th>@Html.DisplayNameFor(m => Model.vwcustomerPolicies.FirstOrDefault().PolicyTerm)</th>
+                <th>@Html.DisplayNameFor(m => Model.vwcustomerPolicies.FirstOrDefault().Managername)</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.vwcustomerPolicies.ToList())
+            {
+                <tr>
+                    <td>@item.Username</td>
+                    <td>@item.Policyname</td>
+                    <td>@item.Duration</td>
+                    <td>@item.PolicyAmount</td>
+                    <td>@item.PremiumAmount</td>
+                    <td>@item.RegisterdDate</td>
+                    <td>@item.RegisteredID</td>
+                    <td>@item.PolicyTerm</td>
+                    <td>@item.Managername</td>
+
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+</div>
+
+

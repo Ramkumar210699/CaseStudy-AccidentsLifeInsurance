@@ -1,0 +1,10 @@
+﻿@model CaseStudy.Models.PolicyCoverage
+
+@if (ViewBag.Duration != null)
+{
+    foreach (var item in ViewBag.Duration)
+    {
+        //<option value="@item.Value">@item.Text</option>
+        <option value="@item.Value">@item.Text</option>
+    }
+}

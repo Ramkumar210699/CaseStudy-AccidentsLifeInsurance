@@ -1,0 +1,105 @@
+﻿@model CaseStudy.Models.Vw_customerpolicydetails
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<h2>
+    Policy Details of @Html.DisplayFor(model => model.Username)</h2>
+
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Username)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Username)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Policyname)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Policyname)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RegisterdDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RegisterdDate)
+            </dd>
+
+            <dt>
+                Policy Duration(in Years)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Duration)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PolicyAmount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PolicyAmount)
+            </dd>
+           
+            <dt>
+                @Html.DisplayNameFor(model => model.PolicyTerm)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PolicyTerm)
+            </dd>
+
+            <dt>
+                Total No.of Terms
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserNoTerms)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PremiumAmount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PremiumAmount)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NomineeName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NomineeName)
+            </dd>
+
+            <dt>
+                Relation
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NomineeRelation)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Managername)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Managername)
+            </dd>
+
+
+
+        </dl>
+    </div>

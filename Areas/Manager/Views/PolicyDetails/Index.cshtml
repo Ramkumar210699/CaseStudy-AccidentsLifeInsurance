@@ -1,0 +1,117 @@
+﻿@model CaseStudy.ViewModel.PolicyDetailsAll
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+
+@*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />*@
+<script src="~/Scripts/modernizr-2.6.2.js"></script>
+<ul class="nav nav-pills">
+    <li class="nav-item ">
+        <a class="nav-link active rounded-0" data-toggle="pill" href="#home">Policy Details</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded-0" data-toggle="pill" href="#menu1">Injury Types</a>
+    </li>
+</ul>
+<div class="tab-content">
+
+    <div class="tab-pane container active p-0" id="home">
+        <h3 class="text-uppercase p-2 text-center">Policy Details</h3>
+
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark text-white">
+                <tr>
+                    <th>@Html.DisplayNameFor(m => Model.PolicyDetail.FirstOrDefault().PolicyName)</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PolicyDetail)
+                {
+                    <tr>
+                        <td>@item.PolicyName</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark text-white">
+                <tr>
+                    @*<th>@Html.DisplayNameFor(m => Model.vwPolicydetls.FirstOrDefault().PolicyName)</th>
+                        <th>@Html.DisplayNameFor(m => Model.vwPolicydetls.FirstOrDefault().ManagerName)</th>
+                        <th>@Html.DisplayNameFor(m => Model.vwPolicydetls.FirstOrDefault().PolicyCoverageAmount)</th>
+                        <th>@Html.DisplayNameFor(m => Model.vwPolicydetls.First().PolicyAmount)</th>
+                        <th>@Html.DisplayNameFor(m => Model.vwPolicydetls.FirstOrDefault().PolicyDuration)</th>
+                        <th>@Html.DisplayNameFor(m => Model.vwPolicydetls.FirstOrDefault().MaturityYears)</th>*@
+                    <th>@Html.DisplayNameFor(m => Model.PolicyCoverage.FirstOrDefault().PolicyCoverageAmount)</th>
+                    <th>@Html.DisplayNameFor(m => Model.PolicyCoverage.First().PolicyAmount)</th>
+                    <th>@Html.DisplayNameFor(m => Model.PolicyCoverage.FirstOrDefault().PolicyDuration)</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PolicyCoverage.ToList())
+                {
+                    <tr>
+                        <td>@item.PolicyCoverageAmount</td>
+                        <td>@item.PolicyAmount</td>
+                        <td>@item.PolicyDuration</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane container fade p-0" id="menu1">
+        <h5 class="text-uppercase p-2 text-center">List of Injure Details</h5>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark text-white">
+                <tr>
+                    <th>@Html.DisplayNameFor(m => Model.PolicyDetail.FirstOrDefault().PolicyName)</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PolicyDetail)
+                {
+                    <tr>
+                        <td>@item.PolicyName</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark text-white">
+                <tr>
+
+                    <th>@Html.DisplayNameFor(m => Model.InjuryType.FirstOrDefault().InjuryName)</th>
+                    <th>@Html.DisplayNameFor(m => Model.InjuryType.FirstOrDefault().InjuryDescription)</th>
+                    <th>@Html.DisplayNameFor(m => Model.InjuryType.FirstOrDefault().ReimbursePercent)</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.InjuryType)
+                {
+                    <tr>
+                        <td>@item.InjuryName</td>
+                        <td>@item.InjuryDescription</td>
+                        <td>@item.ReimbursePercent</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

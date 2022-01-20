@@ -1,0 +1,186 @@
+﻿@model CaseStudy.Models.PolicyDetailCoverageModel
+
+@{
+    ViewBag.Title = "Application";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#PolicyID").change(function () {
+            var Policyid = $(this).val();
+            //debugger
+            $.ajax({
+                type: "post",
+                url: "/Customer/Home/GetMaturity?PolicyId=" + Policyid,
+                contentType: "html",
+                success: function (response) {
+                   // debugger
+                    $("#Srlno").empty();
+                    $("#Srlno").append(response);
+                }
+            })
+        })
+
+    })
+    $(document).ready(function () {
+        $("#Srlno").change(function () {
+            var Policyamount = $(this).val();
+          //  debugger
+            $.ajax({
+                type: "Get",
+                url: "/Customer/Home/Duration?PolicyAmount=" + Policyamount,
+                contentType: "html",
+                //success: function (response) {
+                //    debugger
+                //    $("#PolicyDuration").empty();
+                //    $("#PolicyDuration").append(response);
+                success: function (data) {
+                   // debugger
+                    $("#PolicyDuration").val(data[0]);
+                    $("#PolicyCoverageAmount").val(data[1]);
+                    $("#ManagerID").val(data[2]);
+                }
+            })
+        })
+
+
+    })
+    $(document).ready(function () {
+        $("#PolicyTerm").change(function () {
+            var Policyterm = $(this).val();
+           // debugger
+            $.ajax({
+                type: "Get",
+                url: "/Customer/Home/UserTerms?PolicyTerm=" + Policyterm,
+                contentType: "html",
+                //success: function (response) {
+                //    debugger
+                //    $("#PolicyDuration").empty();
+                //    $("#PolicyDuration").append(response);
+                success: function (data) {
+                   // debugger
+                    $("#UserNoTerms").val(data[0]);
+                    $("#PremiumAmount").val(data[1]);
+                    $("#Managername").val(data[2]);
+                }
+            })
+        })
+
+     })
+
+
+</script>
+
+
+
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div style="background-color:darkcyan ">
+    <div class="form-horizontal">
+        <h3>CustomerPolicyDetail</h3>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PolicyID, "PolicyID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("Name", (SelectList)ViewBag.Name, "--Select Policy--")*@
+                @Html.DropDownListFor(model => model.PolicyID, ViewBag.Name as SelectList, "--Select Policy--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PolicyID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.RegisterdDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RegisterdDate, new { htmlAttributes = new { @class = "form-control", @Value = @DateTime.Now.ToString() } })
+                @Html.ValidationMessageFor(model => model.RegisterdDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Srlno, "PolicyAmount", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("PolicyCovAmount", (SelectList)ViewBag.Name, "--Select Policy--")*@
+                @Html.DropDownListFor(model => model.Srlno, new SelectList(""), "---------Select Policy Amount---------", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Srlno, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PolicyDuration, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PolicyDuration, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.DropDownListFor(model => model.PolicyDuration, new SelectList(""),"-----------------------------------", new { @class = "text-danger"})*@
+                @Html.ValidationMessageFor(model => model.PolicyDuration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PolicyCoverageAmount, "CoverageAmount", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PolicyCoverageAmount, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PolicyTerm, "PolicyTerm", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("Name", (SelectList)ViewBag.Name, "--Select Policy--")*@
+                @Html.DropDownListFor(model => model.PolicyTerm, ViewBag.Term as SelectList, "---------Select Policy Term---------", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PolicyTerm, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserNoTerms, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserNoTerms, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserNoTerms, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PremiumAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PremiumAmount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PremiumAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomineeName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NomineeName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NomineeName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomineeRelation, "NomineeRelation", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("Name", (SelectList)ViewBag.Name, "--Select Policy--")*@
+                @Html.DropDownListFor(model => model.NomineeRelation, ViewBag.Rel as SelectList, "---------Select Relation---------", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NomineeRelation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Managername, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Managername, new { htmlAttributes = new { @class = "form-control" } })
+
+                @Html.ValidationMessageFor(model => model.Managername, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</div>
+    }
+
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>

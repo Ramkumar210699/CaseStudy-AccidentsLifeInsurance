@@ -1,0 +1,47 @@
+﻿@model CaseStudy.ViewModel.PolicyDetailsAll
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<head>
+    <style>
+        .main {
+            background-image: url("https://media.istockphoto.com/photos/round-podium-or-pedestal-with-green-backgound-picture-id1299157256?b=1&k=20&m=1299157256&s=170667a&w=0&h=K1_5faLgJFynzHgBRyHrPKJCL24k9Oy_2-NFadPVjiw=");
+            background-size:150%;
+            height: contain;
+        }
+    </style>
+</head>
+@*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/modernizr-2.6.2.js"></script>*@
+<div class="tab-content">
+
+
+    <h3 class="text-uppercase p-2 text-center">Customer Policy Details</h3>
+
+
+
+    <table class="table table-bordered table-striped main">
+        <thead class="thead-dark text-white">
+            <tr>
+                <th>@Html.DisplayNameFor(m => Model.vwPolicydetls.FirstOrDefault().PolicyName)</th>
+                <th>@Html.DisplayNameFor(m => Model.vwPolicydetls.FirstOrDefault().ManagerName)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.vwPolicydetls.ToList())
+            {
+                <tr>
+                    <td>@item.PolicyName</td>
+                    <td>@item.ManagerName</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+</div>
+
+

@@ -1,0 +1,71 @@
+﻿@model CaseStudy.Models.UsersRegistrationDetail
+
+@{
+    ViewBag.Title = "Login";
+}
+<style>
+    .main {
+        background-image: url("https://media.istockphoto.com/photos/round-podium-or-pedestal-with-green-backgound-picture-id1299157256?b=1&k=20&m=1299157256&s=170667a&w=0&h=K1_5faLgJFynzHgBRyHrPKJCL24k9Oy_2-NFadPVjiw=");
+        background-size: cover;
+        height: contain;
+    }
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+@using (@Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-body text-center">
+        <div class="div_div">
+            <div class="div_class">
+                <img style="padding-top:50px" src="data:image/png;base64,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" />
+            </div>
+
+        </div>
+    </div>
+
+    <hr />
+    <body style="grid-column-end:auto">
+        <div class="form-horizontal main">
+            <h2 style="background-color:black; color:white; text-align:center">Please Login</h2>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Username, "User Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserPassword, "User Password", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserType, "User type", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.DropDownListFor(model => model.UserType,new SelectList(Model.UserType1.UserDescription,"Text","Value",Model.UserType1.UserType))*@
+                    @Html.DropDownListFor(model => model.UserType, new List<SelectListItem> { new SelectListItem { Text = "Admin", Value = "1" }, new SelectListItem { Text = "Manager", Value = "2" }, new SelectListItem { Text = "Customer", Value = "3" } }, "--Select User Type--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Login" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+
+}
